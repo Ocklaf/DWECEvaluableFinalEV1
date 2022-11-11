@@ -4,6 +4,7 @@ import { WORDS_DIV_CONTAINER } from './index.js'
 
 function removeTheClickEventPreviousDivSlots() {
   let previousDivSlots = returnAllSlots()
+  
   for (let slot of previousDivSlots) {
     slot.removeEventListener('click', toggleClassSelected)
   }

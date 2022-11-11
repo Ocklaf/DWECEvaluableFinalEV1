@@ -2,44 +2,49 @@
 import { RANDOM_WORD_FOR_PLAY } from './index.js'
 import {
   autoSelectEmptySlot,
-  removeAllColorClass,
-  verifyTheWordAndAct
+  removeAllColorClass,verifyTheWordAtDisplay,
+  returnActualSlotSelected
 } from './basicFunctions.js'
 
 function showLetterClicked(keyClicked) {
-  let isAnySlotSelected = document.querySelector('.selected')
+  let actualSelectedSlot = returnActualSlotSelected()
+  let isAnySlotSelected = actualSelectedSlot !== null
 
   if (isAnySlotSelected) {
-    isAnySlotSelected.innerHTML = keyClicked
+    actualSelectedSlot.innerHTML = keyClicked
   }
 
   autoSelectEmptySlot()
 }
 
+function addClass(color, slotDivToAddColor) {
+  removeAllColorClass(slotDivToAddColor)
+  slotDivToAddColor.classList.add(color)
+}
+
 function addColorClass(slotsDivElements) {
-  let wordFormedInSlots = ''
-  
+  let wordAtDisplay = ''
+
   for (let i = 0; i < slotsDivElements.length; i++) {
-    let hasRandomWordTheLetterOfTheSlot = RANDOM_WORD_FOR_PLAY.includes(slotsDivElements[i].textContent)
-    
-    if (!hasRandomWordTheLetterOfTheSlot) {
-      removeAllColorClass(slotsDivElements[i])
-      slotsDivElements[i].classList.add('grey')
+    let isTheSlotLetterInTheWord = RANDOM_WORD_FOR_PLAY.includes(slotsDivElements[i].textContent)
+    let isActualPositionAndLetterMatch = slotsDivElements[i].textContent === RANDOM_WORD_FOR_PLAY.charAt(i)
+    let actualDivToAddColor = slotsDivElements[i]
+
+    if (!isTheSlotLetterInTheWord) {
+      addClass('grey', actualDivToAddColor)
     }
 
-    if (hasRandomWordTheLetterOfTheSlot) {
-      removeAllColorClass(slotsDivElements[i])
-      slotsDivElements[i].classList.add('yellow')
+    if (isTheSlotLetterInTheWord) {
+      addClass('yellow', actualDivToAddColor)
     }
 
-    if (slotsDivElements[i].textContent === RANDOM_WORD_FOR_PLAY.charAt(i)) {
-      removeAllColorClass(slotsDivElements[i])
-      slotsDivElements[i].classList.add('green')
+    if (isActualPositionAndLetterMatch) {
+      addClass('green', actualDivToAddColor)
     }
 
-    wordFormedInSlots += slotsDivElements[i].textContent
+    wordAtDisplay += actualDivToAddColor.textContent
   }
-  verifyTheWordAndAct(wordFormedInSlots)
+  verifyTheWordAtDisplay(wordAtDisplay)
 }
 
 export {

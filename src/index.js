@@ -5,10 +5,9 @@ import { createDivWordContainer } from './domElementsCreation.js'
 import { selectRandomWord } from './basicFunctions.js'
 
 const WORDS_DIV_CONTAINER = document.getElementById('words')
-const RANDOM_WORD_FOR_PLAY = selectRandomWord().toUpperCase()
+const RANDOM_WORD_FOR_PLAY = selectRandomWord()
 
 function startApp() {
-  //console.log(RANDOM_WORD_FOR_PLAY) /*Console CUIDADO QUE HAY QUE BORRARLO ANTES DE ENTREGAR*/
   createDivWordContainer()
   installKeyboardHandlers()
 }

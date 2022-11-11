@@ -1,4 +1,10 @@
-import { autoSelectEmptySlot } from './basicFunctions.js'
+import {
+  autoSelectEmptySlot,
+  returnFirstSlot,
+  returnSecondSlot,
+  returnLastSlot,
+  returnActualSlotSelected
+} from './basicFunctions.js'
 
 function clearPreviousSlot(slotSelected) {
   let isNotEmptyThePreviousSibling = slotSelected.previousSibling.textContent !== ''
@@ -13,13 +19,9 @@ function clearPreviousSlot(slotSelected) {
   }
 }
 
-function returnFirstSlot() {
-  return document.querySelector('#words .word:last-child .slot:first-child')
-}
-
 function clearSelectedSlot(slotSelected) {
   let firstSlot = returnFirstSlot()
-  let secondSlot = document.querySelector('#words .word:last-child .slot:nth-child(2)')
+  let secondSlot = returnSecondSlot()
   let hasContent = slotSelected.textContent !== ''
   let hasContentAndIsNotTheFirstLetter = hasContent && slotSelected !== firstSlot
   let hasNotContentAndCantSelectFirstLetter = !hasContent && slotSelected !== secondSlot
@@ -35,8 +37,7 @@ function clearSelectedSlot(slotSelected) {
 
 function backspaceKeyClicked() {
   let firstSlot = returnFirstSlot()
-  let slotSelected = document.querySelector('.selected')
-
+  let slotSelected = returnActualSlotSelected()
   let isAnySlotSelectedDifferentOfFirst = slotSelected !== null && slotSelected !== firstSlot
   let isNoSelectedSlot = slotSelected === null
 
@@ -45,7 +46,7 @@ function backspaceKeyClicked() {
   }
 
   if (isNoSelectedSlot) {
-    let lastSlot = document.querySelector('#words .word:last-child .slot:last-child')
+    let lastSlot = returnLastSlot()
     lastSlot.classList.add('selected')
     backspaceKeyClicked()
   }
