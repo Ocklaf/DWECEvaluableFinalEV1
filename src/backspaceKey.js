@@ -1,14 +1,13 @@
 import {
   autoSelectEmptySlot,
   returnFirstSlot,
-  returnSecondSlot,
   returnLastSlot,
   returnActualSlotSelected
 } from './basicFunctions.js'
 
 function clearPreviousSlot(slotSelected) {
-  let isNotEmptyThePreviousSibling = slotSelected.previousSibling.textContent !== ''
   let previousSibling = slotSelected.previousSibling
+  let isNotEmptyThePreviousSibling = previousSibling.textContent !== ''
 
   if (isNotEmptyThePreviousSibling) {
     previousSibling.textContent = ''
@@ -21,31 +20,27 @@ function clearPreviousSlot(slotSelected) {
 
 function clearSelectedSlot(slotSelected) {
   let firstSlot = returnFirstSlot()
-  let secondSlot = returnSecondSlot()
   let hasContent = slotSelected.textContent !== ''
-  let hasContentAndIsNotTheFirstLetter = hasContent && slotSelected !== firstSlot
-  let hasNotContentAndCantSelectFirstLetter = !hasContent && slotSelected !== secondSlot
+  let hasNoContentAndIsNotFirstSlot = !hasContent && slotSelected !== firstSlot
 
-  if (hasContentAndIsNotTheFirstLetter) {
+  if (hasContent) {
     slotSelected.textContent = ''
   }
 
-  if (hasNotContentAndCantSelectFirstLetter) {
+  if (hasNoContentAndIsNotFirstSlot) {
     clearPreviousSlot(slotSelected)
   }
 }
 
 function backspaceKeyClicked() {
-  let firstSlot = returnFirstSlot()
   let slotSelected = returnActualSlotSelected()
-  let isAnySlotSelectedDifferentOfFirst = slotSelected !== null && slotSelected !== firstSlot
-  let isNoSelectedSlot = slotSelected === null
+  let isAnySlotSelected = slotSelected !== null
 
-  if (isAnySlotSelectedDifferentOfFirst) {
+  if (isAnySlotSelected) {
     clearSelectedSlot(slotSelected)
   }
 
-  if (isNoSelectedSlot) {
+  if (!isAnySlotSelected) {
     let lastSlot = returnLastSlot()
     lastSlot.classList.add('selected')
     backspaceKeyClicked()

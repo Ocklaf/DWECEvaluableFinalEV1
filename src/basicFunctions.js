@@ -9,8 +9,6 @@ const returnActualSlotSelected = () => document.querySelector('#words .word:last
 
 const returnFirstSlot = () => document.querySelector('#words .word:last-child .slot:first-child')
 
-const returnSecondSlot = () => document.querySelector('#words .word:last-child .slot:nth-child(2)')
-
 const returnLastSlot = () => document.querySelector('#words .word:last-child .slot:last-child')
 
 const returnAllSlots = () => document.querySelectorAll('#words .word:last-child .slot')
@@ -73,7 +71,6 @@ export {
   checkIfAnySlotIsEmpty,
   returnActualSlotSelected,
   returnFirstSlot,
-  returnSecondSlot,
   returnLastSlot,
   returnAllSlots,
   composeWordFromSlotsContent,

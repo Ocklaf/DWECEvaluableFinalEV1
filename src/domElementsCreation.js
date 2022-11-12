@@ -1,10 +1,10 @@
 
-import { returnAllSlots, toggleClassSelected } from './basicFunctions.js'
+import { returnAllSlots, toggleClassSelected, returnActualSlotSelected } from './basicFunctions.js'
 import { WORDS_DIV_CONTAINER } from './index.js'
 
 function removeTheClickEventPreviousDivSlots() {
   let previousDivSlots = returnAllSlots()
-  
+
   for (let slot of previousDivSlots) {
     slot.removeEventListener('click', toggleClassSelected)
   }
@@ -30,6 +30,10 @@ function createDivWordContainer() {
   }
 
   removeTheClickEventPreviousDivSlots()
+  let cleanSelectedIfExitsBeforeToCreate = returnActualSlotSelected()
+  if (cleanSelectedIfExitsBeforeToCreate !== null) {
+    cleanSelectedIfExitsBeforeToCreate.classList.remove('selected')
+  }
   divClassWordContainer.appendChild(htmlFragmentToInyect)
   WORDS_DIV_CONTAINER.appendChild(divClassWordContainer)
 }

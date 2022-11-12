@@ -2,7 +2,8 @@
 import { RANDOM_WORD_FOR_PLAY } from './index.js'
 import {
   autoSelectEmptySlot,
-  removeAllColorClass,verifyTheWordAtDisplay,
+  removeAllColorClass,
+  verifyTheWordAtDisplay,
   returnActualSlotSelected
 } from './basicFunctions.js'
 
@@ -24,7 +25,6 @@ function addClass(color, slotDivToAddColor) {
 
 function addColorClass(slotsDivElements) {
   let wordAtDisplay = ''
-
   for (let i = 0; i < slotsDivElements.length; i++) {
     let isTheSlotLetterInTheWord = RANDOM_WORD_FOR_PLAY.includes(slotsDivElements[i].textContent)
     let isActualPositionAndLetterMatch = slotsDivElements[i].textContent === RANDOM_WORD_FOR_PLAY.charAt(i)
